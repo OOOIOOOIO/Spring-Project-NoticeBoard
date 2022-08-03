@@ -28,8 +28,6 @@ public class ReplyServiceImpl implements ReplyService{
 	@Override
 	public ReplyPageDTO getList(SearchCriteria scri, Long board_num) {
 		
-		// ReplyPageDTO @Allagr~ 뭐시기 생성자 어노테이션을 통해 바로 넣어준다.
-		// 그럼 controller에서 ReplyPageDTO를 데이터로 넘겨준다!
 		return new ReplyPageDTO(mapper.getTotal(board_num), mapper.getList(scri, board_num));
 	}
 

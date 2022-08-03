@@ -33,8 +33,6 @@ public class BoardController {
 	private BoardService service;
 	
 	
-//	@PostMapping(value="/board_list") 완성되면 POST로 바꿔주기
-//	@GetMapping(value="/board_list") // 임시
 	@RequestMapping(value="/board_list", method = {RequestMethod.GET, RequestMethod.POST})
 	public void board_list(SearchCriteria scri, Model model) {
 		model.addAttribute("boardList", service.getList(scri));
@@ -43,14 +41,12 @@ public class BoardController {
 		
 	}
 	
-	// 등록하기 : boadList에서 pageInfo 파라미터 들이 날라온다. 글 등록하러 가는 곳
 	@GetMapping(value="/board_regist")
 	public void board_regist(@ModelAttribute("scri")SearchCriteria scri) {
 		
 	}
 	
 	
-	// 등록하기 :글 등록한 후 다시 list로 넘어간다.
 	@PostMapping(value="/board_regist")
 	public String board_regist(@RequestParam("uploadFile") MultipartFile[] uploadFiles, BoardDTO board, RedirectAttributes ra) {
 		
@@ -97,27 +93,11 @@ public class BoardController {
 		return "redirect:/board/board_list";
 	}
 	
-	// 게시물 들어가기
 	@GetMapping({"/board_get", "/board_modify"})
 	public void board_get(@ModelAttribute("scri")SearchCriteria scri, Long board_num, Model model) {
 		model.addAttribute("board", service.read(board_num));
 
 	}
-	
-//	@GetMapping(value="/board_get")
-//	public void board_get(@ModelAttribute("scri")SearchCriteria scri, Long board_num, Model model) {
-//		model.addAttribute("board", service.read(board_num));
-//		log.info("+++++++++++" + service.read(board_num));
-//	}
-//	
-////	// 수정하기 : 수정하러 들어가는 곳
-//	@GetMapping(value="/board_modify")
-//	public void board_modify(@ModelAttribute("scri")SearchCriteria scri, Long board_num, Model model) {
-//		model.addAttribute("board", service.read(board_num));
-//		log.info("=============" + service.read(board_num));
-//	}
-	
-	// 수정하기 : 수정 완료 후 다시 리스트로 
 	@PostMapping(value="/board_modify")
 	public String board_modify(BoardDTO board, SearchCriteria scri ,RedirectAttributes ra) {
 		if(service.update(board) == 1) {
@@ -126,7 +106,6 @@ public class BoardController {
 		return "redirect:/board/board_list" + scri.getListLink();
 	}
 	
-	// 삭제하기 : 삭제 완료 후 다시 리스트로
 	@PostMapping(value="/board_remove")
 	public String board_remove(Long board_num, SearchCriteria scri, RedirectAttributes ra) {
 		if(service.delete(board_num) == 1) {

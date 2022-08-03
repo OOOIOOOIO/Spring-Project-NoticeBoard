@@ -31,7 +31,6 @@ public class UserController {
 	@Setter(onMethod_ = @Autowired)
 	private UserService service;
 	
-	// 회원가입 메인 페이지
 	@RequestMapping(value="/join", method= {RequestMethod.GET, RequestMethod.POST})
 	public String join() {
 		
@@ -102,9 +101,6 @@ public class UserController {
 		
 		int result = service.login(user);
 		
-		// login 성공하였으면 session 생성해주기
-		// jsp 에서는 el문으로 ${sessionId} 이렇게 사용하면 되고
-		// java에서는 HttpServletRequest import 해서  getSession()으로 가져오면 된다.
 		if(result > 0) {
 			session.setAttribute("user_id", user.getUser_id());
 		}
@@ -120,10 +116,9 @@ public class UserController {
 	}
 	
 	
-	@GetMapping(value = "/logout") // a태그로 로그아웃 만들자 
+	@GetMapping(value = "/logout")
 	public String logout(HttpServletRequest session) {
 		
-		// 세션 삭제해주기
 		session.removeAttribute("user_id");
 		
 		return "/login/login_main";

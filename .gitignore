@@ -12,10 +12,15 @@ target/
 classes/
 META-INF/
 
+# my #
 mapper/
 mybatis/
 web.xml
 pom.xml
+root-context.xml
+log4j.xml
+servlet-context.xml
+test/
 
 # Eclipse #
 
