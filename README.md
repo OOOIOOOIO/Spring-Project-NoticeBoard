@@ -2,6 +2,7 @@
 
 ### Spring Project! post and share your experience!!
 
+-> js 콜백패턴 다시 공부해서 정리
 
 <br>
 <hr>
